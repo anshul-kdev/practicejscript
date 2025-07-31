@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+
+  
+  <div class="shadow-xl w-96 bg-base-100 shadow-sm mx-auto mt-10 bg-blue-50 bg-linear-to-r/decreasing from-indigo-500 to-teal-400 rounded-xl">
+    <div class="card-body">
+      <h2 class="text-3xl font-bold text-white text-center mb-4">Weather Search</h2>
+      <div class="flex gap-2 mb-4">
+          <button id="searchBtn" class="btn btn-primary rounded-full material-symbols-outlined">search</button>
+        <input id="cityInput" type="text" placeholder="Enter city" class="input input-bordered rounded-full w-full" />
+    </div>
+    <!-- weather icons -->
+   <div class="flex flex-col items-center gap-y-6 text-xl">
+  <!-- Weather result -->
+  <div id="weatherResult" class="flex flex-col gap-2 items-center">
+    <div class="material-symbols-outlined text-white text-3xl">weather_hail</div>
+    <h1 class="text-white text-3xl font-bold">24</h1>
+  </div>
+
+  <!-- Row of weather icons -->
+  <div class="flex justify-center gap-14 text-white text-3xl">
+    <div class="material-symbols-outlined">air</div>
+    <div class="material-symbols-outlined">humidity_percentage</div>
+    <div class="material-symbols-outlined">visibility</div>
+    <div class="material-symbols-outlined">wind_power</div>
+  </div>
+</div>
+
+
+
+    
+      <!-- default text -->
+      
+</div>
+
+
+    <script src="practice.js"></script>
+</body>
+</html>
