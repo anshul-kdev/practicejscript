@@ -1,4 +1,11 @@
-const apiKey = "85ea4211787e47bad1a52b51cb6e8bc1"; // Replace with your actual OpenWeather API key
+let apiKey = null;
+
+// Fetch the API key once on load
+fetch('/weather-key')
+    .then(response => response.json())
+    .then(data => {
+        apiKey = data.apiKey;
+    });
 
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=`;
 const searchBtn = document.getElementById("searchBtn");
@@ -103,10 +110,17 @@ let currentWeatherMain = null;
 // Update currentWeatherMain in checkweather
 async function checkweather(cityValue){
     showLoading();
+
+    // Wait until apiKey is loaded
+    if (!apiKey) {
+        cityNameElem.innerHTML = "Loading API key...";
+        return;
+    }
+
     try {
         const weather = await fetch(apiUrl + cityValue + `&appid=${apiKey}&units=metric`);
         const data = await weather.json();
-        if(weather.status == 404){
+        if(weather.status == 404 || data.cod == "404"){
             cityNameElem.innerHTML = "City not found";
             tempElem.innerHTML = "";
             iconElem.innerHTML = `<span class="material-symbols-outlined text-5xl">error</span>`;
@@ -153,10 +167,8 @@ city.addEventListener("keyup", (event) => {
     }
 });
 
-// Cursor tracker gradient effect (improved)
 const card = document.getElementById('weatherCard');
 const gradient = document.getElementById('cursor-gradient');
-
 if (card && gradient) {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
