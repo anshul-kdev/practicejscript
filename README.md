@@ -40,7 +40,7 @@ practicejscript/
    ```
 
 3. **Configure API keys and environment variables:**
-   - Create a `.env` file in the root directory (see `.env.example` if available).
+   - Create a `.env` file in the root directory.
    - Example for Weatherapp:
      ```
      API_KEY=your_openweathermap_api_key
