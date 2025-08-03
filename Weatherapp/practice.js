@@ -1,13 +1,4 @@
-let apiKey = null;
-
-// Fetch the API key once on load
-fetch('/weather-key')
-    .then(response => response.json())
-    .then(data => {
-        apiKey = data.apiKey;
-    });
-
-const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=`;
+const apiUrl = `/weather-data?city=`;
 const searchBtn = document.getElementById("searchBtn");
 const city = document.getElementById("city");
 const cityNameElem = document.getElementById("cityname");
@@ -110,20 +101,18 @@ let currentWeatherMain = null;
 // Update currentWeatherMain in checkweather
 async function checkweather(cityValue){
     showLoading();
-
-    // Wait until apiKey is loaded
-    if (!apiKey) {
-        cityNameElem.innerHTML = "Loading API key...";
-        return;
-    }
-
     try {
-        const weather = await fetch(apiUrl + cityValue + `&appid=${apiKey}&units=metric`);
-        const data = await weather.json();
-        if(weather.status == 404 || data.cod == "404"){
+        const response = await fetch(apiUrl + encodeURIComponent(cityValue));
+        const data = await response.json();
+        if(response.status == 404 || data.cod == "404"){
             cityNameElem.innerHTML = "City not found";
             tempElem.innerHTML = "";
             iconElem.innerHTML = `<span class="material-symbols-outlined text-5xl">error</span>`;
+            currentWeatherMain = null;
+        } else if (data.cod && data.cod !== 200) {
+            cityNameElem.innerHTML = data.message || "Error fetching data";
+            tempElem.innerHTML = "";
+            iconElem.innerHTML = `<span class=\"material-symbols-outlined text-5xl\">error</span>`;
             currentWeatherMain = null;
         } else {
             cityNameElem.innerHTML = cityValue;
@@ -151,7 +140,7 @@ async function checkweather(cityValue){
     } catch (error) {
         cityNameElem.innerHTML = "Error fetching data";
         tempElem.innerHTML = "";
-        iconElem.innerHTML = `<span class="material-symbols-outlined text-5xl">error</span>`;
+        iconElem.innerHTML = `<span class=\"material-symbols-outlined text-5xl\">error</span>`;
         currentWeatherMain = null;
     }
 }

@@ -3,6 +3,7 @@
     "connect-livereload": "^0.6.1",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "livereload": "^0.9.3"
+    "livereload": "^0.9.3",
+    "node-fetch": "^2.7.0"
   }
 }
